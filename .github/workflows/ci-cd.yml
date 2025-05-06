@@ -1,0 +1,31 @@
+name: CI/CD for FastAPI Docker
+
+on:
+  push:
+    branches:
+      - main  # Chạy khi có push vào nhánh chính
+  pull_request:
+    branches:
+      - main  # Chạy khi có pull request vào nhánh chính
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest  # Sử dụng runner của GitHub Actions là Ubuntu
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2  # Checkout mã nguồn
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}  # Docker username từ Secrets
+        password: ${{ secrets.DOCKER_PASSWORD }}  # Docker password từ Secrets
+
+    - name: Build and push Docker image
+      run: |
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/fastapi-cicd:latest .
+        docker push ${{ secrets.DOCKER_USERNAME }}/fastapi-cicd:latest

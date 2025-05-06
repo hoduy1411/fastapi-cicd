@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  app:
+    image: duyhv1411/fastapi-cicd:latest
+    container_name: fastapi-cicd
+    build: .
+    ports:
+      - "8000:8000"
+    restart: always
