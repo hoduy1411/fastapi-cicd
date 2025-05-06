@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Lấy mã nguồn từ GitHub
-                git 'https://github.com/hoduy1411/fastapi-cicd.git'
+                git branch: 'main', url: 'https://github.com/hoduy1411/fastapi-cicd.git'
             }
         }
 
