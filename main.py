@@ -16,4 +16,4 @@ app = FastAPI(
 # Route đơn giản hello_world
 @app.get("/hello_world")
 def hello_world():
-    return {"message": "Hello, World 2!"}
+    return {"message": "Hello, World 3!"}
