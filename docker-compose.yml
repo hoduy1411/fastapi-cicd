@@ -4,7 +4,17 @@ services:
   app:
     image: duyhv1411/fastapi-cicd:latest
     container_name: fastapi-cicd
-    build: .
+    # build: .
     ports:
       - "8000:8000"
+    restart: always
+
+  watchtower:
+    image: containrrr/watchtower:latest
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WATCHTOWER_TIMEOUT=30  # Thời gian chờ giữa các lần kiểm tra
+    command: --interval 30
     restart: always
